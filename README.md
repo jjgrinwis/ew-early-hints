@@ -10,7 +10,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 - Reads the `link` header (if present) and sets it as a PMUSER variable.
 - Uses a custom request header (`earlyhints: get_my_link_header`) to trigger special caching logic in the Akamai delivery configuration.
 - Handles errors gracefully and logs them for troubleshooting.
-- **In-memory caching**: Latest version uses caching in the EdgeWorker itself to avoid httpRequest calls on every request, resulting in huge performance increase.🔥
+- **In-memory caching**: Latest version uses caching in the EdgeWorker itself to avoid httpRequest calls on every request resulting in a huge performance increase.🔥
 
 ## How It Works
 
@@ -24,9 +24,9 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 ## Usage
 
 1. **Get Started**: Clone this repo and run `npm install`.
-2. **Install Akamai CLI**: Ensure the Akamai CLI is installed with the EdgeWorkers module and you are using the right credentials in `~/.edgerc`.
-3. **Set ids**: Create EdgeWorker id `npm run create-id`, lookup the Group ID `npm run list-groups`, and set EdgeWorker tier, 100 or 200 in package.json.
-4. **Configure Delivery**: Ensure your Akamai delivery configuration starts this EdgeWorker and you setup caching with the special header and enables pre-fresh/caching as needed.
+2. **Install Akamai CLI**: Ensure the Akamai CLI is installed with the EdgeWorkers module and make sure you are using the right credentials from `~/.edgerc`.
+3. **Set ids**: Create an EdgeWorker id `npm run create-id`, lookup the Group ID `npm run list-groups`, and set EdgeWorker tier, 100 or 200 in package.json.
+4. **Configure Delivery**: Ensure your Akamai delivery configuration starts this EdgeWorker and you setup caching with the special header and enable caching, pre-fresh cache and cache id modification.
 5. **Deploy EdgeWorker**: Build and deploy this EdgeWorker to the Akamai platform by running `npm run deploy:staging` or `npm run deploy:production`
 6. **Test**: Use tools like `curl` to verify the `link` header is fetched and the PMUSER variable is set.
 
