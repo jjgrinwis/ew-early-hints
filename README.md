@@ -19,7 +19,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 3. **Early Hints**: The PMUSER variable `PMUSER_PAGE_TYPE` is used to set the Early Hints behavior in the Akamai delivery configuration.
 4. **Delivery Configuration Caching**: The delivery configuration should be set up to cache the response based on that special header and Request Type=EW_SUBREQUEST. This reduces origin load and is only used by the httpRequest from this EdgeWorker so no cache collision with normal HTTP request.
 5. **Loop Prevention**: The `httpRequest` in the EdgeWorker will call the original URL but the EdgeWorker won't be triggered again as sub-requests don't trigger EdgeWorkers.
-6. **EdgeWorker Memory Caching**: The link header is cached in the EdgeWorker with a TTL timestamp. If the TTL is not expired, the cached value is served; otherwise, a new version is fetched from the origin.
+6. **EdgeWorker Memory Caching**: The link header is cached in the EdgeWorker with a TTL timestamp. If the TTL is not expired, the cached value is served; otherwise, a new version is fetched from the Akamai Edge Cache or Origin.
 
 ## Usage
 
