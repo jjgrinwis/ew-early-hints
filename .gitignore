@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+built/
+dist/
+*.tgz
+
+# Environment and credentials
+.edgerc
+.env
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# don't store edgekv tokens in git, these are different for each environment and should be kept secret
+edgekv_tokens.js
+
+# no need to track log file
+package-lock.json

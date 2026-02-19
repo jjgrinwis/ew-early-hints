@@ -1,0 +1,47 @@
+{
+  "name": "ew-early-hints-link-header",
+  "version": "0.2.2",
+  "description": "Set early hints via link header coming from Origin",
+  "keywords": [
+    "akamai",
+    "edgeworkers",
+    "103"
+  ],
+  "license": "ISC",
+  "author": "jgrinwis@akamai.com",
+  "type": "commonjs",
+  "main": "index.js",
+  "config": {
+    "ewid": "105404",
+    "edgerc_section": "betajam",
+    "tier": "200",
+    "ew_group_id": "48668"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "package": "npm run package:bundle && npm run package:tarball",
+    "package:bundle": "mkdir -p built && echo '{\"edgeworker-version\":\"'$npm_package_version'\",\"description\":\"'$npm_package_description'\"}' > built/bundle.json",
+    "package:tarball": "mkdir -p dist && cd built && tar czf ../dist/ew_$npm_package_config_ewid_$npm_package_version.tgz *",
+    "upload": "akamai edgeworkers --section $npm_package_config_edgerc_section upload $npm_package_config_ewid --bundle dist/ew_$npm_package_config_ewid_$npm_package_version.tgz",
+    "activate:staging": "akamai edgeworkers --section $npm_package_config_edgerc_section activate $npm_package_config_ewid staging $npm_package_version",
+    "activate:production": "akamai edgeworkers --section $npm_package_config_edgerc_section activate $npm_package_config_ewid production $npm_package_version",
+    "deploy:staging": "npm run lint && npm run build && npm run package && npm run upload && npm run activate:staging",
+    "deploy:production": "npm run lint && npm run build && npm run package && npm run upload && npm run activate:production",
+    "generate-token": "akamai edgeworkers --section $npm_package_config_edgerc_section auth --expiry 600 $npm_package_config_hostname",
+    "list-groups": "akamai edgeworkers --section $npm_package_config_edgerc_section lg",
+    "create-id": "akamai edgeworkers --section $npm_package_config_edgerc_section create-id $npm_package_config_ew_group_id -restier $npm_package_config_tier $npm_package_name",
+    "clean": "rm -rf built dist"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/akamai-edgeworkers": "^1.1.19",
+    "prettier": "^3.8.1"
+  }
+}
