@@ -1,14 +1,14 @@
 {
   "name": "ew-early-hints-link-header",
   "version": "0.2.2",
-  "description": "Set early hints via link header coming from Origin",
+  "description": "Set early hints via link header coming from Origin or cache",
   "keywords": [
     "akamai",
     "edgeworkers",
     "103"
   ],
   "license": "ISC",
-  "author": "jgrinwis@akamai.com",
+  "author": "john@grinwis.com",
   "type": "commonjs",
   "main": "index.js",
   "config": {
