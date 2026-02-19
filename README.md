@@ -42,7 +42,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 
 ## Requirements
 
-- npm installed
+- npm and tsc installed
 - Akamai EdgeWorkers enabled on your property.
 - TypeScript and Akamai EdgeWorkers for development.
 
