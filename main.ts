@@ -5,7 +5,7 @@ import { httpRequest } from "http-request";
 const PMUSER_103_HINTS = "PMUSER_PAGE_TYPE";
 
 // Simple in-memory EdgeWorker cache to avoid making httpRequest calls over and over again.
-// ewMemoryCacheTTL can be updated based on your needs. Will initialize during init event and local per EdgeWorker instance.
+// ewMemoryTTL can be updated based on your needs. Will initialize during the init event, and it's local per EdgeWorker instance, not shared!
 let ewMemoryCache = { expires: 0, data: "" };
 const ewMemoryTTL = 30000; //milliseconds, so 30 seconds
 
