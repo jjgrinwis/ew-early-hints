@@ -10,7 +10,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 - Reads the `link` header (if present) and sets it as a PMUSER variable.
 - Uses a custom request header (`earlyhints: get_my_link_header`) to trigger special caching logic in the Akamai delivery configuration.
 - Handles errors gracefully and logs them for troubleshooting.
-- **In-memory caching**: Latest version uses caching in the EdgeWorker itself to avoid httpRequest calls on every request, resulting in huge performance increase.
+- **In-memory caching**: Latest version uses caching in the EdgeWorker itself to avoid httpRequest calls on every request, resulting in huge performance increase.🔥
 
 ## How It Works
 
