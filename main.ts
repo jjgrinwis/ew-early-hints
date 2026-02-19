@@ -36,7 +36,7 @@ export async function onClientRequest(
       const response = await httpRequest(request.url, OPTIONS);
       let linkHeader = response.getHeader("link")?.[0];
 
-      // if we have some response and a link header, update our cache, otherwise we will keep using the cached value until it expires
+      // if we have some response and a link header, update our cache, otherwise just use the old cached version.
       if (response.ok && linkHeader) {
         ewMemoryCache.data = linkHeader;
         ewMemoryCache.expires = TIMESTAMP + ewMemoryTTL;

@@ -14,7 +14,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 
 ## How It Works
 
-1. **onClientRequest**: When a client request is received, the EdgeWorker makes an internal HTTP request to the same URL, including a special header to trigger cache logic in the delivery configuration.
+1. **onClientRequest**: When a client request is received, the EdgeWorker serves from memory or makes an internal HTTP request to the same URL, including a special header to trigger cache logic in the delivery configuration.
 2. **Link Header Extraction**: If the origin response contains a `link` header, its value is stored in the PMUSER variable `PMUSER_PAGE_TYPE` in this example.
 3. **Early Hints**: The PMUSER variable `PMUSER_PAGE_TYPE` is used to set the Early Hints behavior in the Akamai delivery configuration.
 4. **Delivery Configuration Caching**: The delivery configuration should be set up to cache the response based on that special header and Request Type=EW_SUBREQUEST. This reduces origin load and is only used by the httpRequest from this EdgeWorker so no cache collision with normal HTTP request.
