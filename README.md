@@ -52,7 +52,7 @@ ISC
 
 ## Author
 
-jgrinwis@akamai.com
+john@grinwis.com
 
 ## Testing Early Hints with curl
 
