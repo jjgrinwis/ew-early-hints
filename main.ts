@@ -24,7 +24,7 @@ export async function onClientRequest(
   // spread operator(...) to conditionally add the authorization header to the Headers object. If authHeader exists, it adds authorization: authHeader to the Headers. If authHeader is undefined, it adds nothing (spreads an empty object, which adds no properties).
   const authHeader = request.getHeader("authorization")?.[0];
   const OPTIONS = {
-    Headers: {
+    headers: {
       earlyhints: "get_my_link_header",
       ...(authHeader ? { authorization: authHeader } : {}),
     },
