@@ -9,14 +9,6 @@ const PMUSER_103_HINTS = "PMUSER_PAGE_TYPE";
 let ewMemoryCache = { expires: 0, data: "" };
 const ewMemoryTTL = 30000; //milliseconds, so 30 seconds
 
-// special header used to cache a non-cacheable page via the delivery configuration
-// in the delivery configuration we enable caching, set fast cache pre-fresh and set cache key id using this request header to make it unique for EW httpRequest calls.
-// also setting a short timeout to avoid waiting too long for the origin response.
-const OPTIONS = {
-  Headers: { earlyhints: "get_my_link_header" },
-  timeout: 250,
-};
-
 /**
  * The early hints behavior only works in the onClientRequest stage, so we need to call the original endpoint but do some smart caching.
  * we don't want to double the number of requests to the origin, so we will cache the response when issued by this httpRequest EdgeWorker subrequest.
@@ -27,6 +19,17 @@ export async function onClientRequest(
 ): Promise<void> {
   // get timestamp in msec to compare with our cache expiration time, this is needed to avoid making httpRequest calls on every request and instead serve the link header from cache when possible.
   const TIMESTAMP = Date.now();
+
+  // we should pass the authorization header from the original request to the httpRequest call if it exists.
+  // spread operator(...) to conditionally add the authorization header to the Headers object. If authHeader exists, it adds authorization: authHeader to the Headers. If authHeader is undefined, it adds nothing (spreads an empty object, which adds no properties).
+  const authHeader = request.getHeader("authorization")?.[0];
+  const OPTIONS = {
+    Headers: {
+      earlyhints: "get_my_link_header",
+      ...(authHeader ? { authorization: authHeader } : {}),
+    },
+    timeout: 250,
+  };
 
   // if cache has expired, fetch new link header from origin, otherwise use cached value
   if (TIMESTAMP > ewMemoryCache.expires) {
