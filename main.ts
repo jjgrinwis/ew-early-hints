@@ -46,6 +46,10 @@ export async function onClientRequest(
         logger.debug(
           `Fetched link header from origin and updated cache: ${JSON.stringify(ewMemoryCache)}`,
         );
+      } else {
+        logger.error(
+          `Failed to fetch link header from origin, status: ${response.status}, or link header empty: ${linkHeader}. Serving from cache if available: ${JSON.stringify(ewMemoryCache)}`,
+        );
       }
     } catch (error) {
       logger.error(`Error fetching link header from origin: ${error}`);
