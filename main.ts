@@ -26,7 +26,7 @@ export async function onClientRequest(
   const OPTIONS = {
     Headers: {
       earlyhints: "get_my_link_header",
-      ...(authHeader ? { Authorization: authHeader } : {}),
+      ...(authHeader ? { authorization: authHeader } : {}),
     },
     //timeout: 500,
   };
