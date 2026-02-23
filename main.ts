@@ -26,9 +26,9 @@ export async function onClientRequest(
   const OPTIONS = {
     Headers: {
       earlyhints: "get_my_link_header",
-      ...(authHeader ? { authorization: authHeader } : {}),
+      ...(authHeader ? { Authorization: authHeader } : {}),
     },
-    timeout: 500,
+    //timeout: 500,
   };
 
   // if cache has expired, fetch new link header from origin, otherwise use cached value
