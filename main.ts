@@ -34,7 +34,7 @@ export async function onClientRequest(
       // Attempt to retrieve the 'link' header from the origin response
       // getHeader will return an array of header values if the header is present, so we take the first one [0] as there should only be one link header coming from the origin
       const response = await httpRequest(request.url, OPTIONS);
-      let linkHeader = response.getHeader("link")?.[0];
+      let linkHeader = response.getHeader("link")?.join(",");
 
       // if we have some response and a link header, update our cache, otherwise just use the old cached version.
       if (response.ok && linkHeader) {

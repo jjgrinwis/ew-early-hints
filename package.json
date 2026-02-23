@@ -1,7 +1,7 @@
 {
   "name": "ew-early-hints-link-header",
   "version": "0.2.2",
-  "description": "Set early hints via link header coming from Origin or cache",
+  "description": "Set early hints via link header coming from Origin or EW cache",
   "keywords": [
     "akamai",
     "edgeworkers",
@@ -29,7 +29,7 @@
     "activate:production": "akamai edgeworkers --section $npm_package_config_edgerc_section activate $npm_package_config_ewid production $npm_package_version",
     "deploy:staging": "npm run lint && npm run build && npm run package && npm run upload && npm run activate:staging",
     "deploy:production": "npm run lint && npm run build && npm run package && npm run upload && npm run activate:production",
-    "generate-token": "akamai edgeworkers --section $npm_package_config_edgerc_section auth --expiry 600 $npm_package_config_hostname",
+    "generate-token": "akamai edgeworkers --section $npm_package_config_edgerc_section auth --expiry 600 --jsonout | jq .msg",
     "list-groups": "akamai edgeworkers --section $npm_package_config_edgerc_section lg",
     "create-id": "akamai edgeworkers --section $npm_package_config_edgerc_section create-id $npm_package_config_ew_group_id -restier $npm_package_config_tier $npm_package_name",
     "clean": "rm -rf built dist"
