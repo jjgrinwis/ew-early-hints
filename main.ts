@@ -51,7 +51,7 @@ export async function onClientRequest(
         );
       } else {
         logger.error(
-          `Failed to fetch link header from origin, status: ${response.status}, or link header empty: ${linkHeader}. Serving from cache if available: ${JSON.stringify(ewMemoryCache)}`,
+          `Failed to fetch link header from origin, status: ${response.status}, OPTIONS: ${JSON.stringify(OPTIONS)}, link header: ${linkHeader}. Serving from cache if available: ${JSON.stringify(ewMemoryCache)}`,
         );
       }
     } catch (error) {
