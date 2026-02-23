@@ -36,10 +36,7 @@ export async function onClientRequest(
     try {
       // Attempt to retrieve the 'link' header from the origin response
       // getHeader will return an array of header values if the header is present, joining them into one list.
-      const response = await httpRequest(
-        "https://development.etos.nl/",
-        OPTIONS,
-      );
+      const response = await httpRequest(request.url, OPTIONS);
       let linkHeader = response.getHeader("link")?.join(",");
 
       // if we have some response and a link header, update our cache, otherwise just use the old cached version.
