@@ -1,6 +1,6 @@
 {
   "name": "ew-early-hints-link-header",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Set early hints via link header coming from Origin or EW cache",
   "keywords": [
     "akamai",
