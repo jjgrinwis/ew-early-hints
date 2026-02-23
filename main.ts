@@ -32,7 +32,7 @@ export async function onClientRequest(
   if (TIMESTAMP > ewMemoryCache.expires) {
     try {
       // Attempt to retrieve the 'link' header from the origin response
-      // getHeader will return an array of header values if the header is present, so we take the first one [0] as there should only be one link header coming from the origin
+      // getHeader will return an array of header values if the header is present, joining them into one list.
       const response = await httpRequest(request.url, OPTIONS);
       let linkHeader = response.getHeader("link")?.join(",");
 
