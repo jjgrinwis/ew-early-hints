@@ -44,7 +44,7 @@ export async function onClientRequest(
         ewMemoryCache.data = linkHeader;
         ewMemoryCache.expires = TIMESTAMP + ewMemoryTTL;
         logger.debug(
-          `Fetched link header from origin and updated cache: ${JSON.stringify(ewMemoryCache)}`,
+          `Fetched link header from origin and updated cache again: ${JSON.stringify(ewMemoryCache)}`,
         );
       }
     } catch (error) {
