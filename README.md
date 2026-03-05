@@ -26,7 +26,7 @@ This EdgeWorker reads the `link` header from the origin response during the `onC
 1. **Get Started**: Clone this repo and run `npm install`.
 2. **Install Akamai CLI**: Ensure the Akamai CLI is installed with the EdgeWorkers module and make sure you are using the right credentials from `~/.edgerc`.
 3. **Set ids**: Create an EdgeWorker id `npm run create-id`, lookup the Group ID `npm run list-groups`, and set EdgeWorker tier, 100 or 200 in package.json.
-4. **Configure Delivery**: Ensure your Akamai delivery configuration starts this EdgeWorker and you setup caching with the special header and enable caching, pre-fresh cache and cache id modification.
+4. **Configure Delivery**: Ensure your Akamai delivery configuration starts this EdgeWorker and you setup caching with the special header and enable caching, pre-fresh cache and cache id modification. Only start the EdgeWorker when it makes sense, like ignore images/css for example or during a OIDC login flow.
 5. **Deploy EdgeWorker**: Build and deploy this EdgeWorker to the Akamai platform by running `npm run deploy:staging` or `npm run deploy:production`
 6. **Test**: Use tools like `curl` to verify the `link` header is fetched and the PMUSER variable is set.
 
