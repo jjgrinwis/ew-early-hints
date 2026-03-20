@@ -23,7 +23,7 @@ export async function onClientRequest(
 
   // get PMUSER var from delivery configuration to set early hints headers.
   const EARLY_HINTS_HEADER =
-    request.getVariable("PMUSER_103_HINTS") || DEFAULT_EARLY_HINTS_HEADER;
+    request.getVariable("PMUSER_EW_HINTS_HEADER") || DEFAULT_EARLY_HINTS_HEADER;
 
   // we should pass the authorization header from the original request to the httpRequest call if it exists.
   // spread operator(...) to conditionally add the authorization header to the Headers object. If authHeader exists, it adds authorization: authHeader to the Headers. If authHeader is undefined, it adds nothing (spreads an empty object, which adds no properties).
