@@ -3,12 +3,14 @@ import { httpRequest } from "http-request";
 
 // var should match you PMUSER var defined in your delivery configuration.
 const PMUSER_103_HINTS = "PMUSER_PAGE_TYPE";
+
+// default value that's going to be added to the EW-Early-Hints if PMUSER_EW_HINTS_HEADER is not defined in the delivery configuration.
 const DEFAULT_EARLY_HINTS_HEADER = "get_my_link_header";
 
 // Simple in-memory EdgeWorker cache to avoid making httpRequest calls over and over again.
 // ewMemoryTTL can be updated based on your needs. Will initialize during the init event, and it's local per EdgeWorker instance, not shared!
 let ewMemoryCache = { expires: 0, data: "" };
-const ewMemoryTTL = 30000; //milliseconds, so 30 seconds
+const ewMemoryTTL = 30000; // milliseconds, so 30 seconds
 
 /**
  * The early hints behavior only works in the onClientRequest stage, so we need to call the original endpoint but do some smart caching.
