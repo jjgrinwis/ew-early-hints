@@ -3,6 +3,7 @@ import { httpRequest } from "http-request";
 
 // var should match you PMUSER var defined in your delivery configuration.
 const PMUSER_103_HINTS = "PMUSER_PAGE_TYPE";
+const DEFAULT_EARLY_HINTS_HEADER = "get_my_link_header";
 
 // Simple in-memory EdgeWorker cache to avoid making httpRequest calls over and over again.
 // ewMemoryTTL can be updated based on your needs. Will initialize during the init event, and it's local per EdgeWorker instance, not shared!
@@ -20,12 +21,16 @@ export async function onClientRequest(
   // get timestamp in msec to compare with our cache expiration time, this is needed to avoid making httpRequest calls on every request and instead serve the link header from cache when possible.
   const TIMESTAMP = Date.now();
 
+  // get PMUSER var from delivery configuration to set early hints headers.
+  const EARLY_HINTS_HEADER =
+    request.getVariable("PMUSER_103_HINTS") || DEFAULT_EARLY_HINTS_HEADER;
+
   // we should pass the authorization header from the original request to the httpRequest call if it exists.
   // spread operator(...) to conditionally add the authorization header to the Headers object. If authHeader exists, it adds authorization: authHeader to the Headers. If authHeader is undefined, it adds nothing (spreads an empty object, which adds no properties).
   const authHeader = request.getHeader("authorization")?.[0];
   const OPTIONS = {
     headers: {
-      earlyhints: "get_my_link_header",
+      "EW-Early-Hints": EARLY_HINTS_HEADER,
       ...(authHeader ? { authorization: authHeader } : {}),
     },
     //timeout: 500,
